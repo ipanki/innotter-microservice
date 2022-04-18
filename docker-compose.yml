@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  web:
+    container_name: innotter-microservice
+    build: .
+    command: /bin/sh -c "./entrypoint.sh"
+    volumes:
+    - .:/app
+    ports:
+    - "8080:8080"
+    depends_on:
+    - consumer
+  consumer:
+    container_name: innotter-consumer
+    build: .
+    command: sh -c "python consumer.py"
+    volumes:
+    - .:/app
